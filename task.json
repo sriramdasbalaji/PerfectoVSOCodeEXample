@@ -1,0 +1,58 @@
+{
+  "id": "a615cd40-5e41-11e5-bee7-bd6eddb93f41",
+  "name": "PerfectoUploadApp",
+  "friendlyName": "PerfectoUploadApp",
+  "description": "Upload file to Perfecto Cloud",
+  "author": "Uzi Eilon",
+  "helpMarkDown": "Upload app [*.apk ot *.ipa] to Perfecto Mobile cloud",
+  "category": "Build",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [],
+  "version": {
+    "Major": "0",
+    "Minor": "1",
+    "Patch": "0"
+  },
+  "minimumAgentVersion": "1.83.0",
+  "instanceNameFormat": "PerfectoUploadApp $(message)",
+  "inputs": [
+    {
+          "name": "connectedServiceName",
+          "type": "connectedService:Generic",
+          "label": "Perfecto Connection",
+          "defaultValue": "",
+          "required": true,
+          "helpMarkDown": "Perfecto Mobile account details"
+      },
+      {
+          "name": "fromLib",
+          "type": "string",
+          "label": "App folder",
+          "defaultValue": "",
+          "required": true,
+          "helpMarkDown": "Application location"
+      },
+      {
+          "name": "ToLib",
+          "type": "string",
+          "label": "Folder in Perfecto Cloud",
+          "defaultValue": "PRIVATE",
+          "required": true,
+          "helpMarkDown": "Perfecto folder"
+      }
+  ],
+  "execution": {
+    "Node": {
+      "target": "sample.js",
+      "argumentFormat": ""
+    },
+    "PowerShell": {
+      "target": "$(currentDirectory)\\sample.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
