@@ -194,7 +194,7 @@ public class util {
 		System.out.println("EXECUET TEST BUILD THE LIST FROM THE FILE ");
 		BufferedReader br;
 		try {
-			File f = new File("..\\..\\testConfigFiles\\config.txt");
+			File f = new File("..\\..\\..\\testConfigFiles\\config1.txt");
 
 			br = new BufferedReader(new FileReader(f));
 			String line = null;  
