@@ -200,8 +200,13 @@ public class util {
 			String line = null;  
 			while ((line = br.readLine()) != null)  
 			{  
-				line.trim();
-				System.out.println(line);
+				line = line.trim();
+				System.out.println("line >"+line);
+				if (line.startsWith("device"))
+				{ 
+					String id = line.substring(7);
+					System.out.println("ID >>"+id);
+				} 
 			} 	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
