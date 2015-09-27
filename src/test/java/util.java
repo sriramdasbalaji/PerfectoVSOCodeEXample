@@ -15,6 +15,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
@@ -187,6 +192,21 @@ public class util {
 	{
 		List<String> devices = new ArrayList();
 		System.out.println("EXECUET TEST BUILD THE LIST FROM THE FILE ");
+		BufferedReader br;
+		try {
+			File f = new File("..\\..\\testConfigFiles\\config.txt");
+
+			br = new BufferedReader(new FileReader(f));
+			String line = null;  
+			while ((line = br.readLine()) != null)  
+			{  
+				line.trim();
+				System.out.println(line);
+			} 	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
 		devices.add("71EDDAE8C07850B0A910F2CF9E69A93095B996DA");
 		return devices;
 		
