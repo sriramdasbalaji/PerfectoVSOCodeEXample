@@ -201,12 +201,18 @@ public class util {
 			while ((line = br.readLine()) != null)  
 			{  
 				line = line.trim();
+
+				if (line.length() >2)
+				{
+					String cleanC = line.substring(1,2);
+					line = line.replace(cleanC, "");
+				}
 				System.out.println("line >"+line);
 				if (line.startsWith("device"))
 				{ 
 					String id = line.substring(7);
 					System.out.println("ID >>"+id);
-				} 
+				} 				
 			} 	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
