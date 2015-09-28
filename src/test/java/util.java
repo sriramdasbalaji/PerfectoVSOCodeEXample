@@ -207,7 +207,7 @@ public class util {
 					String cleanC = line.substring(1,2);
 					line = line.replace(cleanC, "");
 				}
-				System.out.println("line >"+line);
+			
 				if (line.startsWith("device"))
 				{ 
 					String id = line.substring(7);
