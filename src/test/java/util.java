@@ -212,13 +212,14 @@ public class util {
 				{ 
 					String id = line.substring(7);
 					System.out.println("ID >>"+id);
+					devices.add(id);
 				} 				
 			} 	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
-		devices.add("71EDDAE8C07850B0A910F2CF9E69A93095B996DA");
+		
 		return devices;
 		
 	}
