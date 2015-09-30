@@ -12,11 +12,13 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Test;
 
+import salesforce.util;
+
 
 public class test1 extends basicTest{
 
 	@Test (dataProvider="Devices") 
-	public void f12(String DeviceId) {
+	public void SPG(String DeviceId) {
 		System.out.println("Test1 in Test"+DeviceId);
 		RemoteWebDriver d = util.getRWD(DeviceId);
 		try {
@@ -34,40 +36,27 @@ public class test1 extends basicTest{
 
 	@Override
 	public void execTest(RemoteWebDriver driver) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println(" IN EXECUTE");
-		
-		String current = new java.io.File( "." ).getCanonicalPath();
-        System.out.println("***** Current dir:"+current);
-        
-		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-
-		driver.get("http://www.awwwards.com");
-
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+	 	driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
+		driver.findElement(By.xpath("//*[@text='Access your SPG Account']")).click();
+			 
+		driver.findElement(By.xpath("//android.widget.EditText")).sendKeys("tgolani");
+		driver.findElement(By.xpath("(//android.widget.EditText)[2]")).sendKeys("spg2011");
+		driver.findElement(By.xpath("//android.widget.Button")).click();
+		 
+		driver.findElement(By.xpath("//android.widget.TextView[@text='Preferred']")).click();
 
+			WebElement mNum = driver.findElement(By.xpath("//android.widget.TextView[contains(@text,'Starpoints')]"));
+		System.out.println("****** Account number :" +mNum.getText());
+		
+		util.swipe("50%,80%",  "50%,20%" , driver);
+		driver.findElement(By.xpath("//android.widget.Button[@text='Sign Out']")).click();
 
-		// 	WebDriverWait wait = new WebDriverWait(webdriver, 30);
-		// 	wait.until(ExpectedConditions.elementToBeClickable()));
-		driver.findElement(By.xpath("//*[@class='submit']"));
+		driver.findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
 
-
-		// click the menu if mobile
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-
-		try {
-			driver.findElement(By.xpath("//*[@class='bt-menu']")).click();;
-
-		} catch (Exception e) {
-			// not a mobile - no menu 
-		}
-		driver.findElement(By.xpath("//*[@class='wrapper-nav']//child::*[text()='Nominees']")).click();;
-
-		driver.findElement(By.xpath(".//*[@class='rollover site'][1]")).click();
-
-
+		driver.close();
+		
 
 	}
 
