@@ -1,6 +1,7 @@
 package test.java;
 
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Test;
 
-import salesforce.util;
 
 
 public class test1 extends basicTest{
@@ -72,6 +72,12 @@ public class test1 extends basicTest{
 	@Override
 	public void endTest(RemoteWebDriver driver) {
 		driver.quit();
+		try {
+			util.downloadReport(driver, "html", "VSO_REP");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 	}
 
