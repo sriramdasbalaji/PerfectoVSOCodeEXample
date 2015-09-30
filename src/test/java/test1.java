@@ -17,17 +17,17 @@ import org.testng.annotations.Test;
 
 public class test1 extends basicTest{
 
-	@Test (dataProvider="Devices") 
-	public void SPG(String DeviceId) {
-		System.out.println("Test1 in Test"+DeviceId);
-		RemoteWebDriver d = util.getRWD(DeviceId);
+	@Test (dataProvider="PerfectoParams") 
+	public void SPG(PerfectoTestParams params) {
+		System.out.println("Test1 in Test"+params._platform);
+		 RemoteWebDriver d = util.getAppiumDriver(params._device,params._activityBandle,params._platform,params._cloud,params._user,params._password,params._repKey);
 		try {
-			this.execTest(d);
+		 	this.execTest(d);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally
 		{
-			this.endTest(d);
+		 	this.endTest(d);
 
 		}
 
@@ -39,25 +39,7 @@ public class test1 extends basicTest{
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	 	driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
-		driver.findElement(By.xpath("//*[@text='Access your SPG Account']")).click();
-			 
-		driver.findElement(By.xpath("//android.widget.EditText")).sendKeys("tgolani");
-		driver.findElement(By.xpath("(//android.widget.EditText)[2]")).sendKeys("spg2011");
-		driver.findElement(By.xpath("//android.widget.Button")).click();
 		 
-		driver.findElement(By.xpath("//android.widget.TextView[@text='Preferred']")).click();
-
-			WebElement mNum = driver.findElement(By.xpath("//android.widget.TextView[contains(@text,'Starpoints')]"));
-		System.out.println("****** Account number :" +mNum.getText());
-		
-		util.swipe("50%,80%",  "50%,20%" , driver);
-		driver.findElement(By.xpath("//android.widget.Button[@text='Sign Out']")).click();
-
-		driver.findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
-
-		driver.close();
-		
-
 	}
 
 	@Override
@@ -78,6 +60,8 @@ public class test1 extends basicTest{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		driver.close();
+
 	
 	}
 

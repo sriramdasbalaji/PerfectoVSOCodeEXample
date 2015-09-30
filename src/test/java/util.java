@@ -75,10 +75,9 @@ public class util {
 
 	}
 
-	public static AppiumDriver getAppiumDriver(String deviceId,String app,String platform)   {
-		return getAppiumDriver(deviceId,app,platform,"https://demo.perfectomobile.com","@Perfecto1");
-	}
-	public static AppiumDriver getAppiumDriver(String deviceId,String app,String platform,String Cloud,String password)   {
+	 
+	 
+	public static AppiumDriver getAppiumDriver(String deviceId,String app,String platform,String Cloud,String user,String password,String appLocationToInstall)   {
 
 		AppiumDriver webdriver= null;
 
@@ -98,6 +97,11 @@ public class util {
 
 		}
 
+		if (appLocationToInstall!= null)
+		{
+			capabilities.setCapability("app",appLocationToInstall );
+
+		}
 		capabilities.setCapability("user", "uzie@perfectomobile.com");
 		capabilities.setCapability("password", password);
 		capabilities.setCapability("deviceName",  deviceId);
@@ -186,7 +190,7 @@ public class util {
 
 	}
 
-	 
+
 
 	public static List <String> getDevieList()
 	{
@@ -207,7 +211,7 @@ public class util {
 					String cleanC = line.substring(1,2);
 					line = line.replace(cleanC, "");
 				}
-			
+
 				if (line.startsWith("device"))
 				{ 
 					String id = line.substring(7);
@@ -219,11 +223,79 @@ public class util {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
-		
+
 		return devices;
-		
+
 	}
 
+	public static List <PerfectoTestParams> getVSOExecParam()
+	{
+		List<PerfectoTestParams> params = new ArrayList();
+		List<String> devices = new ArrayList();
+		System.out.println("EXECUET TEST BUILD THE LIST FROM THE FILE ");
+		BufferedReader br;
+		try {
+			//File f = new File("..\\..\\..\\testConfigFiles\\config1.txt");
+			File f = new File("C:\\aaa\\MS\\BuildAgent\\_work\\testConfigFiles\\config1.txt");
+			br = new BufferedReader(new FileReader(f));
+			String line = null;  
+			String platform = "Android"; // Android or IOS
+			String PerfectoRepKeyForAll = "";
+			// first loop read all the parameters and create a device List 
+			boolean first=true;
+			while ((line = br.readLine()) != null)  
+			{  
+
+				if (first)
+				{
+					  line = line.substring(2);
+
+					first=false;
+				}
+				line = line.trim();
+
+				if (line.length() >2)
+				{
+					String cleanC = line.substring(1,2);
+					line = line.replace(cleanC, "");
+				}
+
+				if (line.startsWith("device"))
+				{ 
+					String id = line.substring(7);
+					System.out.println("ID >>"+id);
+					devices.add(id);
+				} 
+				if (line.startsWith("Perfecto Repository"))
+				{ 
+					PerfectoRepKeyForAll = line.substring(line.indexOf("="));
+					System.out.println("RepD >>"+ PerfectoRepKeyForAll);
+				} 
+
+			} 	
+			if (PerfectoRepKeyForAll.toLowerCase().contains(".apk"))
+			{
+				 platform = "Android";
+			}
+			else
+			{
+				 platform = "ios";
+			}
+
+			// LOOP II - go over all the devices and create a parameters object to the test 
+			for (String device : devices) {
+				PerfectoTestParams p = new PerfectoTestParams(device, PerfectoRepKeyForAll, platform,"spg");
+				params.add(p);
+ 			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+
+		return params;
+
+	}
 	public static void downloadReport(RemoteWebDriver driver, String type, String fileName) throws IOException {
 		try { 
 			String command = "mobile:report:download"; 
