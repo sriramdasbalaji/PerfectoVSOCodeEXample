@@ -268,7 +268,7 @@ public class util {
 				} 
 				if (line.startsWith("Perfecto Repository"))
 				{ 
-					PerfectoRepKeyForAll = line.substring(line.indexOf("="));
+					PerfectoRepKeyForAll = line.substring(line.indexOf("=")+1);
 					System.out.println("RepD >>"+ PerfectoRepKeyForAll);
 				} 
 
@@ -284,7 +284,7 @@ public class util {
 
 			// LOOP II - go over all the devices and create a parameters object to the test 
 			for (String device : devices) {
-				PerfectoTestParams p = new PerfectoTestParams(device, PerfectoRepKeyForAll, platform,"spg");
+				PerfectoTestParams p = new PerfectoTestParams(device, PerfectoRepKeyForAll, platform,"com.starwood.spg");
 				params.add(p);
  			}
 			
