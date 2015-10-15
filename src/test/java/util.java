@@ -256,22 +256,29 @@ public class util {
 			String PerfectoRepKeyForAll = "";
 			// first loop read all the parameters and create a device List 
 			boolean first=true;
+			boolean clean=true;
+
 			while ((line = br.readLine()) != null)  
 			{  
-
+				System.out.println("Line:"+line);
 				if (first)
 				{
-					  line = line.substring(2);
-
+				 	if (line.startsWith("JS"))
+					{ 
+						// from JS no need to clean
+						clean = false;
+					} 
+					 line = line.substring(2);
 					first=false;
 				}
 				line = line.trim();
 
-				if (line.length() >2)
+				if (line.length() >2 && clean)
 				{
 					String cleanC = line.substring(1,2);
 					line = line.replace(cleanC, "");
 				}
+				System.out.println("afterclean:"+line);
 
 				if (line.startsWith("device"))
 				{ 
