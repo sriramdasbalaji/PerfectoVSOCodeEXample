@@ -45,8 +45,8 @@ public class test1 extends basicTest{
 
 		driver.findElement(By.xpath("//*[@text='Access your SPG Account']")).click();
 
-		driver.findElement(By.xpath("//android.widget.EditText")).sendKeys("tgolani");
-		driver.findElement(By.xpath("(//android.widget.EditText)[2]")).sendKeys("spg2011");
+		driver.findElement(By.xpath("//android.widget.EditText")).sendKeys("perfectomobile");
+		driver.findElement(By.xpath("(//android.widget.EditText)[2]")).sendKeys("Perfecto1");
 		driver.findElement(By.xpath("//android.widget.Button")).click();
 
 		driver.findElement(By.xpath("//android.widget.TextView[@text='Preferred']")).click();
