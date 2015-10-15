@@ -195,7 +195,7 @@ public class util {
 	public static List <String> getDevieList()
 	{
 		List<String> devices = new ArrayList();
-		System.out.println("EXECUET TEST BUILD THE LIST FROM THE FILE ");
+		System.out.println("EXECUET TEST BUILD THE LIST FROM THE FILE v2");
 		BufferedReader br;
 		try {
 			File f = new File("..\\..\\..\\testConfigFiles\\config1.txt");
@@ -232,7 +232,7 @@ public class util {
 	{
 		List<PerfectoTestParams> params = new ArrayList();
 		List<String> devices = new ArrayList();
-		System.out.println("EXECUET TEST BUILD THE LIST FROM THE FILE ");
+		System.out.println("EXECUET TEST BUILD THE LIST FROM THE FILE v1");
 		BufferedReader br;
 		try {
 			File f = new File(".."+File.separator +".."+File.separator +"config1.txt");
