@@ -235,7 +235,7 @@ public class util {
 		System.out.println("EXECUET TEST BUILD THE LIST FROM THE FILE ");
 		BufferedReader br;
 		try {
-			File f = new File("..\\..\\config1.txt");
+			File f = new File(".."+File.separator +".."+File.separator +"config1.txt");
 			//File f = new File("C:\\aaa\\MS\\BuildAgent\\_work\\testConfigFiles\\config1.txt");
 			br = new BufferedReader(new FileReader(f));
 			String line = null;  
