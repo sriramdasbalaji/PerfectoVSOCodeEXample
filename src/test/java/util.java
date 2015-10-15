@@ -239,12 +239,15 @@ public class util {
         		System.out.println("Current dir:"+current);
         		System.out.println("file:"+".."+File.separator +".."+File.separator +"config1.txt");
 			// on OS the file will be on folder app on Win two so i check if file exist 
+	
+			
+			
 			File f = new File(".."+File.separator +"config1.txt");
-			File f1 = new File(".."+File.separator +".."+File.separator +"config1.txt");
+		//	File f1 = new File(".."+File.separator +".."+File.separator +"config1.txt");
 
-			if(f.exists() && !f.isDirectory()) { 
-    			 	f = f1;
-			}
+		//	if(f.exists() && !f.isDirectory()) { 
+    	 	//	 	f = f1;
+		//	}
 			
 			//File f = new File("C:\\aaa\\MS\\BuildAgent\\_work\\testConfigFiles\\config1.txt");
 			br = new BufferedReader(new FileReader(f));
