@@ -324,7 +324,7 @@ public class util {
 			Map<String, Object> params = new HashMap(); 
 			params.put("type", "html"); 
 			String report = (String)driver.executeScript(command, params); 
-			File reportFile = new File(getReprtName(fileName, true) ); 
+			File reportFile = new File(getVSOReportLib(fileName) ); 
 			BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(reportFile)); 
 			byte[] reportBytes = OutputType.BYTES.convertFromBase64Png(report); 
 			output.write(reportBytes); output.close(); 
@@ -332,6 +332,11 @@ public class util {
 			System.out.println("Got exception " + ex); }
 	}
 
+	public static String getVSOReportLib(String repID) {
+		String current = new java.io.File( "." ).getCanonicalPath();
+       		System.out.println("Current dir:"+current);
+		return current+File.separator+"Report"+"/rep_"+repID+".html";;
+	}
 	public static String getReprtName(String repID,boolean withPath) {
 		if (withPath)
 		{
