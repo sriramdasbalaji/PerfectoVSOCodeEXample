@@ -333,10 +333,18 @@ public class util {
 	}
 
 	public static String getVSOReportLib(String repID) {
-		String current = new java.io.File( "." ).getCanonicalPath();
-       		System.out.println("Current dir:"+current);
-		return current+File.separator+"Report"+"/rep_"+repID+".html";;
+		String current;
+		try {
+			current = new java.io.File( "." ).getCanonicalPath();
+			System.out.println("Current dir:"+current);
+			return current+File.separator+"Report"+"/rep_"+repID+".html";
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return File.separator;
 	}
+	
 	public static String getReprtName(String repID,boolean withPath) {
 		if (withPath)
 		{
