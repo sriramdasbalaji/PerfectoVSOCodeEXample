@@ -257,6 +257,8 @@ public class util {
 			String line = null;  
 			String platform = "Android"; // Android or IOS
 			String PerfectoRepKeyForAll = "";
+			String bandleID = "";
+			
 			// first loop read all the parameters and create a device List 
 			boolean first=true;
 			boolean clean=true;
@@ -294,6 +296,11 @@ public class util {
 					PerfectoRepKeyForAll = line.substring(line.indexOf("=")+1);
 					System.out.println("RepD >>"+ PerfectoRepKeyForAll);
 				} 
+				if (line.startsWith("BandleID"))
+				{ 
+					bandleID = line.substring(line.indexOf("=")+1);
+					System.out.println("bandleID >>"+ bandleID);
+				} 
 
 			} 	
 			if (PerfectoRepKeyForAll.toLowerCase().contains(".apk"))
@@ -307,7 +314,7 @@ public class util {
 
 			// LOOP II - go over all the devices and create a parameters object to the test 
 			for (String device : devices) {
-				PerfectoTestParams p = new PerfectoTestParams(device, PerfectoRepKeyForAll, platform,"com.starwood.spg");
+				PerfectoTestParams p = new PerfectoTestParams(device, PerfectoRepKeyForAll, platform,bandleID);
 				params.add(p);
  			}
 			
