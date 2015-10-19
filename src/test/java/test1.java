@@ -24,9 +24,9 @@ public class test1 extends basicTest{
 		System.out.println("Test1 in Test"+params._platform);
 		System.out.println("Test1 in Test"+params._repKey);
 
-		RemoteWebDriver d = util.getAppiumDriver(params._device,params._activityBandle,params._platform,params._cloud,params._user,params._password,params._repKey);
+	//	RemoteWebDriver d = util.getAppiumDriver(params._device,params._activityBandle,params._platform,params._cloud,params._user,params._password,params._repKey);
 		try {
-			this.execTest(d);
+	//		this.execTest(d);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally
