@@ -31,7 +31,7 @@ public class test1 extends basicTest{
 			// TODO: handle exception
 		}finally
 		{
-			this.endTest(d);
+	//		this.endTest(d);
 
 		}
 
