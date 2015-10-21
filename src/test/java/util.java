@@ -296,7 +296,7 @@ public class util {
 					PerfectoRepKeyForAll = line.substring(line.indexOf("=")+1);
 					System.out.println("RepD >>"+ PerfectoRepKeyForAll);
 				} 
-				if (line.startsWith("BandleID"))
+				if (line.startsWith("BundleID"))
 				{ 
 					bandleID = line.substring(line.indexOf("=")+1);
 					System.out.println("bandleID >>"+ bandleID);
