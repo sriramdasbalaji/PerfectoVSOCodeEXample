@@ -362,9 +362,9 @@ public class util {
 			{
 				String current = new java.io.File( "." ).getCanonicalPath();
 				System.out.println("Current dir:"+current);
-				System.out.println("file:"+".."+File.separator +".."+File.separator +"config1.txt");
+				//System.out.println("file:"+".."+File.separator +".."+File.separator +"PerfectoConfigExe.json");
 				// on OS the file will be on folder app on Win two so i check if file exist 
-				f = new File(".."+File.separator +"config1.txt");
+				f = new File(".."+File.separator +"PerfectoConfigExe.json");
 
 			}else
 
