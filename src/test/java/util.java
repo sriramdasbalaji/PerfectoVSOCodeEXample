@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
@@ -231,7 +235,7 @@ public class util {
 
 	}
 
-	public static List <PerfectoTestParams> getVSOExecParam()
+	private static List <PerfectoTestParams> getVSOExecParamOld()
 	{
 		List<PerfectoTestParams> params = new ArrayList();
 		List<String> devices = new ArrayList();
@@ -428,7 +432,7 @@ public class util {
 
 	}
 
-	private static String getVSOReportLibOld(String repID) {
+	pubilc static String getVSOReportLib(String repID) {
  		
 		try {
 			String current = new java.io.File( "." ).getCanonicalPath();
