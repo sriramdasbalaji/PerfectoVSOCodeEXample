@@ -1,2 +1,10 @@
-897864D5
-57AF4ED9
+{
+  "devices":[
+    {"device":
+      {"deviceID":"897864D5","os":"Android"}
+    },
+    {"device":
+      {"deviceID":"57AF4ED9","os":"iOS"}
+    }
+   ]
+}
