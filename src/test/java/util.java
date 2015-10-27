@@ -339,8 +339,96 @@ public class util {
 		} catch (Exception ex) { 
 			System.out.println("Got exception " + ex); }
 	}
+	public static List <PerfectoTestParams> getVSOExecParam()
+	{
+		return getVSOExecParam(null);
+	}
 
-	public static String getVSOReportLib(String repID) {
+	public static List <PerfectoTestParams> getVSOExecParam(String file)
+	{
+
+		List<PerfectoTestParams> params = new ArrayList();
+		List<String> devices = new ArrayList();
+		System.out.println("EXECUET TEST BUILD THE LIST FROM THE FILE v1");
+		BufferedReader br;
+		try {
+
+			File f;
+			if (file==null)
+			{
+				String current = new java.io.File( "." ).getCanonicalPath();
+				System.out.println("Current dir:"+current);
+				System.out.println("file:"+".."+File.separator +".."+File.separator +"config1.txt");
+				// on OS the file will be on folder app on Win two so i check if file exist 
+				f = new File(".."+File.separator +"config1.txt");
+
+			}else
+
+			{
+				f = new File(file);
+			}
+
+			FileReader r = new FileReader(f);
+			br = new BufferedReader(r);
+			String line = null;  
+			String platform = "Android"; // Android or IOS
+			String PerfectoRepKeyForAll = "";
+			String bandleID = "";
+			String appType = "";
+			
+			//
+			try {
+				JSONParser parser = new JSONParser();
+
+				Object obj = parser.parse(r);
+
+				JSONObject jsonObject = (JSONObject) obj;
+
+			 	String source = (String) jsonObject.get("Source");
+			 	appType = (String) jsonObject.get("Application type");
+				PerfectoRepKeyForAll = (String) jsonObject.get("Perfecto Repository");
+				bandleID = (String) jsonObject.get("BundleID");
+
+				JSONArray devicesList = (JSONArray) jsonObject.get("devices");
+
+				if (PerfectoRepKeyForAll.toLowerCase().contains(".apk"))
+				{
+					platform = "Android";
+				}
+				else
+				{
+					platform = "ios";
+				}
+				
+				System.out.println("devices:");
+				Iterator<JSONObject> iterator = devicesList.iterator();
+				while (iterator.hasNext()) {
+					
+				 	String dev = (String) iterator.next().get("device");
+					System.out.println("deviceID:"+dev);
+					PerfectoTestParams p = new PerfectoTestParams(dev, PerfectoRepKeyForAll, platform,bandleID);
+					params.add(p);
+
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+
+		 
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+
+		return params;
+
+	}
+
+	private static String getVSOReportLibOld(String repID) {
  		
 		try {
 			String current = new java.io.File( "." ).getCanonicalPath();
