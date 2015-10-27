@@ -432,7 +432,7 @@ public class util {
 
 	}
 
-	pubilc static String getVSOReportLib(String repID) {
+	public static String getVSOReportLib(String repID) {
  		
 		try {
 			String current = new java.io.File( "." ).getCanonicalPath();
