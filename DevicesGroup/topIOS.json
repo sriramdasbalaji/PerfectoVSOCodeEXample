@@ -5,9 +5,6 @@
     },
     {"device":
       {"deviceID":"39F3DA5531ADBE2A05CFF4D65E43A2C38D3D595A","os":"iOS"}
-    },
-    {"device":
-      {"os":"iOS","osVersion":"7.*"}
     }
    ]
 }
