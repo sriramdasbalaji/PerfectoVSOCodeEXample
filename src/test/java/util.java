@@ -258,7 +258,7 @@ public class util {
         		System.out.println("Current dir:"+current);
 			// on OS the file will be on folder app on Win two so i check if file exist 
 			
-			f = new File(".."+File.separator +"PerfectoConfigExe.json");
+			File f = new File(".."+File.separator +"PerfectoConfigExe.json");
 		//	File f1 = new File(".."+File.separator +".."+File.separator +"config1.txt");
 
 		//	if(f.exists() && !f.isDirectory()) { 
