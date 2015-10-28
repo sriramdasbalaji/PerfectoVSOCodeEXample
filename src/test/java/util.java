@@ -84,7 +84,7 @@ public class util {
 
 	 
 	 
-	public static AppiumDriver getAppiumDriver(String deviceId,String app,String platform,String Cloud,String user,String password,String appLocationToInstall)   {
+	public static AppiumDriver getAppiumDriver(device device,String app,String platform,String Cloud,String user,String password,String appLocationToInstall)   {
 
 		AppiumDriver webdriver= null;
 
@@ -111,7 +111,19 @@ public class util {
 		}
 		capabilities.setCapability("user", "uzie@perfectomobile.com");
 		capabilities.setCapability("password", password);
-		capabilities.setCapability("deviceName",  deviceId);
+		if (device._id != null)
+		{
+			capabilities.setCapability("deviceName",  device._id);
+		}
+		if (device._os!= null)
+		{
+			//Android or IOS
+			capabilities.setCapability("platformName",  device._os);
+		}
+		if (device._osVersion!= null)
+		{
+			capabilities.setCapability("platformVersion",  device._osVersion);
+		}
 		//capabilities.setCapability("platformName",  platform);
 
 
@@ -318,8 +330,8 @@ public class util {
 
 			// LOOP II - go over all the devices and create a parameters object to the test 
 			for (String device : devices) {
-				PerfectoTestParams p = new PerfectoTestParams(device, PerfectoRepKeyForAll, platform,bandleID);
-				params.add(p);
+			//	PerfectoTestParams p = new PerfectoTestParams(device, PerfectoRepKeyForAll, platform,bandleID);
+			//	params.add(p);
  			}
 			
 		} catch (Exception e) {
@@ -362,9 +374,9 @@ public class util {
 			{
 				String current = new java.io.File( "." ).getCanonicalPath();
 				System.out.println("Current dir:"+current);
-				//System.out.println("file:"+".."+File.separator +".."+File.separator +"PerfectoConfigExe.json");
+				System.out.println("file:"+".."+File.separator +".."+File.separator +"config1.txt");
 				// on OS the file will be on folder app on Win two so i check if file exist 
-				f = new File(".."+File.separator +"PerfectoConfigExe.json");
+				f = new File(".."+File.separator +"config1.txt");
 
 			}else
 
@@ -408,9 +420,10 @@ public class util {
 				Iterator<JSONObject> iterator = devicesList.iterator();
 				while (iterator.hasNext()) {
 					
-				 	String dev = (String) iterator.next().get("device");
-					System.out.println("deviceID:"+dev);
-					PerfectoTestParams p = new PerfectoTestParams(dev, PerfectoRepKeyForAll, platform,bandleID);
+					JSONObject dev = (JSONObject) iterator.next().get("device");
+					System.out.println("os"+dev.get("os"));
+					device d = new device((String)dev.get("deviceID"),(String)dev.get("os"),(String)dev.get("osVersion"));
+					PerfectoTestParams p = new PerfectoTestParams(d, PerfectoRepKeyForAll, platform,bandleID);
 					params.add(p);
 
 				}
