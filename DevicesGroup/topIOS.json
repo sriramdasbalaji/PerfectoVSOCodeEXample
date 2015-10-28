@@ -1,13 +1,13 @@
 {
   "devices":[
     {"device":
-      {"deviceID":"71EDDAE8C07850B0A910F2CF9E69A93095B996DA","os":"iOS","osVersion":"6.0"}
+      {"deviceID":"71EDDAE8C07850B0A910F2CF9E69A93095B996DA","os":"iOS","osVersion":"8.*"}
     },
     {"device":
       {"deviceID":"39F3DA5531ADBE2A05CFF4D65E43A2C38D3D595A","os":"iOS"}
     },
     {"device":
-      {"os":"iOS","osVersion":"6.0"}
+      {"os":"iOS","osVersion":"7.*"}
     }
    ]
 }
