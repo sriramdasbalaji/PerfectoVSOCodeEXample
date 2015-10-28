@@ -5,22 +5,17 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONArray;
@@ -29,7 +24,6 @@ import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.DriverCommand;
@@ -55,7 +49,7 @@ public class util {
 
 
 
-	public static RemoteWebDriver getRWD(String deviceId)   {
+	public static RemoteWebDriver getRWD(device device)   {
 
 
 		RemoteWebDriver webdriver = null;
@@ -63,11 +57,20 @@ public class util {
 
 		capabilities.setCapability("user", "uzie@perfectomobile.com");
 		capabilities.setCapability("password", "@Perfecto1");
-		capabilities.setCapability("deviceName",  deviceId);
+		if (device._id != null)
+		{
+			capabilities.setCapability("deviceName",  device._id);
+		}
+		if (device._os!= null)
+		{
+			//Android or IOS
+			capabilities.setCapability("platformName",  device._os);
+		}
+		if (device._osVersion!= null)
+		{
+			capabilities.setCapability("platformVersion",  device._osVersion);
+		}
 
-
-		//capabilities.setCapability("takesScreenShot", false);
-		//capabilities.setCapability("automationName", "PerfectoMobile");
 		try {
 			webdriver = new RemoteWebDriver(new URL("https://demo.perfectomobile.com/nexperience/perfectomobile/wd/hub") , capabilities);
 		} catch (Exception e) {
@@ -75,15 +78,13 @@ public class util {
 			System.out.println(ErrToRep);
 			return (null);
 
-
-
 		}
 		return webdriver;
 
 	}
 
-	 
-	 
+
+
 	public static AppiumDriver getAppiumDriver(device device,String app,String platform,String Cloud,String user,String password,String appLocationToInstall)   {
 
 		AppiumDriver webdriver= null;
@@ -211,134 +212,7 @@ public class util {
 
 
 
-	public static List <String> getDevieList()
-	{
-		List<String> devices = new ArrayList();
-		System.out.println("EXECUET TEST BUILD THE LIST FROM THE FILE v2");
-		BufferedReader br;
-		try {
-			File f = new File("..\\..\\..\\testConfigFiles\\config1.txt");
 
-			br = new BufferedReader(new FileReader(f));
-			String line = null;  
-			while ((line = br.readLine()) != null)  
-			{  
-				line = line.trim();
-
-				if (line.length() >2)
-				{
-					String cleanC = line.substring(1,2);
-					line = line.replace(cleanC, "");
-				}
-
-				if (line.startsWith("device"))
-				{ 
-					String id = line.substring(7);
-					System.out.println("ID >>"+id);
-					devices.add(id);
-				} 				
-			} 	
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-
-		return devices;
-
-	}
-
-	private static List <PerfectoTestParams> getVSOExecParamOld()
-	{
-		List<PerfectoTestParams> params = new ArrayList();
-		List<String> devices = new ArrayList();
-		System.out.println("EXECUET TEST BUILD THE LIST FROM THE FILE v1");
-		BufferedReader br;
-		try {
-			String current = new java.io.File( "." ).getCanonicalPath();
-        		System.out.println("Current dir:"+current);
-			// on OS the file will be on folder app on Win two so i check if file exist 
-			
-			File f = new File(".."+File.separator +"PerfectoConfigExe.json");
-		//	File f1 = new File(".."+File.separator +".."+File.separator +"config1.txt");
-
-		//	if(f.exists() && !f.isDirectory()) { 
-    	 	//	 	f = f1;
-		//	}
-			
-			//File f = new File("C:\\aaa\\MS\\BuildAgent\\_work\\testConfigFiles\\config1.txt");
-			br = new BufferedReader(new FileReader(f));
-			String line = null;  
-			String platform = "Android"; // Android or IOS
-			String PerfectoRepKeyForAll = "";
-			String bandleID = "";
-			
-			// first loop read all the parameters and create a device List 
-			boolean first=true;
-			boolean clean=true;
-
-			while ((line = br.readLine()) != null)  
-			{  
-				System.out.println("Line:"+line);
-				if (first)
-				{
-				 	if (line.startsWith("JS"))
-					{ 
-						// from JS no need to clean
-						clean = false;
-					} 
-					 line = line.substring(2);
-					first=false;
-				}
-				line = line.trim();
-
-				if (line.length() >2 && clean)
-				{
-					String cleanC = line.substring(1,2);
-					line = line.replace(cleanC, "");
-				}
-				System.out.println("afterclean:"+line);
-
-				if (line.startsWith("device"))
-				{ 
-					String id = line.substring(7);
-					System.out.println("ID >>"+id);
-					devices.add(id);
-				} 
-				if (line.startsWith("Perfecto Repository"))
-				{ 
-					PerfectoRepKeyForAll = line.substring(line.indexOf("=")+1);
-					System.out.println("RepD >>"+ PerfectoRepKeyForAll);
-				} 
-				if (line.startsWith("BundleID"))
-				{ 
-					bandleID = line.substring(line.indexOf("=")+1);
-					System.out.println("bandleID >>"+ bandleID);
-				} 
-
-			} 	
-			if (PerfectoRepKeyForAll.toLowerCase().contains(".apk"))
-			{
-				 platform = "Android";
-			}
-			else
-			{
-				 platform = "ios";
-			}
-
-			// LOOP II - go over all the devices and create a parameters object to the test 
-			for (String device : devices) {
-			//	PerfectoTestParams p = new PerfectoTestParams(device, PerfectoRepKeyForAll, platform,bandleID);
-			//	params.add(p);
- 			}
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-
-		return params;
-
-	}
 	public static void downloadReport(RemoteWebDriver driver, String type, String fileName) throws IOException {
 		try { 
 			String command = "mobile:report:download"; 
@@ -371,7 +245,6 @@ public class util {
 			{
 				String current = new java.io.File( "." ).getCanonicalPath();
 				System.out.println("Current dir:"+current);
-				System.out.println("file:"+".."+File.separator +".."+File.separator +"config1.txt");
 				// on OS the file will be on folder app on Win two so i check if file exist 
 				f = new File(".."+File.separator +"PerfectoConfigExe.json");
 			}else
@@ -387,7 +260,7 @@ public class util {
 			String PerfectoRepKeyForAll = "";
 			String bandleID = "";
 			String appType = "";
-			
+
 			//
 			try {
 				JSONParser parser = new JSONParser();
@@ -396,26 +269,29 @@ public class util {
 
 				JSONObject jsonObject = (JSONObject) obj;
 
-			 	String source = (String) jsonObject.get("Source");
-			 	appType = (String) jsonObject.get("Application type");
-				PerfectoRepKeyForAll = (String) jsonObject.get("Perfecto Repository");
-				bandleID = (String) jsonObject.get("BundleID");
-
-				JSONArray devicesList = (JSONArray) jsonObject.get("devices");
-
-				if (PerfectoRepKeyForAll.toLowerCase().contains(".apk"))
+				String source = (String) jsonObject.get("Source");
+				appType = (String) jsonObject.get("Application type");
+				if (appType.toLowerCase().equals("native"))
 				{
-					platform = "Android";
-				}
-				else
-				{
-					platform = "ios";
+					PerfectoRepKeyForAll = (String) jsonObject.get("Perfecto Repository");
+					bandleID = (String) jsonObject.get("BundleID");
+
+
+					if (PerfectoRepKeyForAll.toLowerCase().contains(".apk"))
+					{
+						platform = "Android";
+					}
+					else
+					{
+						platform = "ios";
+					}
 				}
 				
 				System.out.println("devices:");
+				JSONArray devicesList = (JSONArray) jsonObject.get("devices");
 				Iterator<JSONObject> iterator = devicesList.iterator();
 				while (iterator.hasNext()) {
-					
+
 					JSONObject dev = (JSONObject) iterator.next().get("device");
 					System.out.println("os"+dev.get("os"));
 					device d = new device((String)dev.get("deviceID"),(String)dev.get("os"),(String)dev.get("osVersion"));
@@ -427,10 +303,10 @@ public class util {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
 
-		 
+
+
+
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -442,18 +318,18 @@ public class util {
 	}
 
 	public static String getVSOReportLib(String repID) {
- 		
+
 		try {
 			String current = new java.io.File( "." ).getCanonicalPath();
 			String repLib = current+File.separator+"Reports";
 			System.out.println("Current dir:"+repLib);
-			
+
 			File dir = new File(repLib);
 			if (!dir.exists())
 			{
 				dir.mkdir();
 			}
-			
+
 			return repLib+File.separator+"rep_"+repID+".html";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -461,7 +337,7 @@ public class util {
 		}
 		return File.separator;
 	}
-	
+
 	public static String getReprtName(String repID,boolean withPath) {
 		if (withPath)
 		{
