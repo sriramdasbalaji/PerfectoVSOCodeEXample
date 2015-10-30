@@ -44,6 +44,9 @@ public class MSiOS extends basicTest{
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
 		driver.findElement(By.xpath("(//*[@label='Home'])[2]")).click();
+		util.sleep(1000);
+		driver.findElement(By.xpath("(//*[@label='User'])[2]")).click();
+		util.sleep(1000);
 		driver.findElement(By.xpath("(//*[@label='Treatment'])[2]")).click();
 		util.sleep(1000);
 		driver.findElement(By.xpath("(//*[@label='Dinner'])[2]"));
