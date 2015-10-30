@@ -40,8 +40,8 @@ public class MSiOS extends basicTest{
 
 	@Override
 	public void execTest(RemoteWebDriver driver) throws Exception {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		System.out.println("****** VSO IOS ***");
+
 
 		driver.findElement(By.xpath("//*[@text='Access your SPG Account']")).click();
 
