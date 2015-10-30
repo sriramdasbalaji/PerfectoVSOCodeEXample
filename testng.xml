@@ -3,7 +3,7 @@
 <suite name="testList" parallel="tests" thread-count="5">
     <test name="myTest"   >
    <classes>
-         <class name="test.java.test1"  />
+         <class name="test.java.VSOiOS"  />
        </classes>
     <!--  
     <packages>
