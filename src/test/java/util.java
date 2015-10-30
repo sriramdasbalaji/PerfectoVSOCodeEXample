@@ -101,7 +101,7 @@ public class util {
 				// instrument and work with Perfecto
 				capabilities.setCapability("automationName", "PerfectoMobile");
 				capabilities.setCapability("autoInstrument", true);
-
+			}
 
 
 		}else
