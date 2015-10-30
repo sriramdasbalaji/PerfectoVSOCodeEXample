@@ -16,48 +16,40 @@ import org.testng.annotations.Test;
 
 
 
-public class MSiOS extends basicTest{
+public class VSOiOS extends basicTest{
 
 
 	@Test (dataProvider="PerfectoParams") 
 	public void test1(PerfectoTestParams params) {
 		System.out.println("Test1 in Test"+params._platform);
 		System.out.println("Test1 in Test"+params._repKey);
-
-	//	RemoteWebDriver d = util.getAppiumDriver(params._device,params._activityBandle,params._platform,params._cloud,params._user,params._password,params._repKey);
+		RemoteWebDriver d = util.getAppiumDriver(params._device,params._activityBandle,params._platform,params._cloud,params._user,params._password,params._repKey);
 		try {
-	//		this.execTest(d);
+			this.execTest(d);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally
 		{
-	//		this.endTest(d);
+			this.endTest(d);
 
 		}
+
 
 
 	}
 
 	@Override
 	public void execTest(RemoteWebDriver driver) throws Exception {
-		System.out.println("****** VSO IOS ***");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
+		driver.findElement(By.xpath("(//*[@label='Home'])[2]")).click();
+		driver.findElement(By.xpath("(//*[@label='Treatment'])[2]")).click();
+		util.sleep(1000);
+		driver.findElement(By.xpath("(//*[@label='Dinner'])[2]"));
+		WebElement dinner = 	driver.findElement(By.xpath("(//*[@label='Dinner'])[2]//following-sibling::*[1]"));
 
-		driver.findElement(By.xpath("//*[@text='Access your SPG Account']")).click();
-
-		driver.findElement(By.xpath("//android.widget.EditText")).sendKeys("perfectomobile");
-		driver.findElement(By.xpath("(//android.widget.EditText)[2]")).sendKeys("Perfecto1");
-		driver.findElement(By.xpath("//android.widget.Button")).click();
-
-		driver.findElement(By.xpath("//android.widget.TextView[@text='Preferred']")).click();
-
-		WebElement mNum = driver.findElement(By.xpath("//android.widget.TextView[contains(@text,'Starpoints')]"));
-		System.out.println("****** Account number :" +mNum.getText());
-
-		driver.findElement(By.xpath("//android.widget.Button[@text='Sign Out']")).click();
-
-		driver.findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
-
+		System.out.println("need to take "+dinner.getText()+" after dinner");
 
 
 	}
@@ -82,7 +74,7 @@ public class MSiOS extends basicTest{
 		//close the test  
 		try{
 			driver.close();				
-			util.downloadReport(driver, "pdf","VSO_SPG_"+devId);	
+			util.downloadReport(driver, "pdf","MS_VSO"+devId);	
 
 		} catch (IOException e) {
 
