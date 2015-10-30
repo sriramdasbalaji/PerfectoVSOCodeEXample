@@ -1,7 +1,7 @@
 {
   "devices":[
     {"device":
-      {"deviceID":"71EDDAE8C07850B0A910F2CF9E69A93095B996DA","os":"iOS","osVersion":"8.*"}
+      {"deviceID":"CEA5D5FBEAC16BA80707F8B5F370F24A08DBAC97","os":"iOS","osVersion":"8.*"}
     },
     {"device":
       {"deviceID":"39F3DA5531ADBE2A05CFF4D65E43A2C38D3D595A","os":"iOS"}
