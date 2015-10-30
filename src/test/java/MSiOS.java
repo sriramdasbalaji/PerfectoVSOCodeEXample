@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 
 
-public class VSOiOS extends basicTest{
+public class MSiOS extends basicTest{
 
 
 	@Test (dataProvider="PerfectoParams") 
