@@ -95,7 +95,13 @@ public class util {
 		if (platform.equalsIgnoreCase("ios"))
 		{
 			capabilities.setCapability("bundleId", app);
-			capabilities.setCapability("automationName", "appium");
+		//	capabilities.setCapability("automationName", "appium");
+			if (app.equals("healthclinic.client.patients"))
+			{
+				// instrument and work with Perfecto
+				capabilities.setCapability("automationName", "PerfectoMobile");
+				capabilities.setCapability("autoInstrument", true);
+
 
 
 		}else
