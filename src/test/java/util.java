@@ -253,6 +253,10 @@ public class util {
 				System.out.println("Current dir:"+current);
 				// on OS the file will be on folder app on Win two so i check if file exist 
 				f = new File(".."+File.separator +"PerfectoConfigExe.json");
+				if(!f.exists() ) { 
+					// windoew
+					f = new File(".."+File.separator +".."+File.separator +"PerfectoConfigExe.json");
+				}
 			}else
 
 			{
