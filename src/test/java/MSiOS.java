@@ -23,7 +23,7 @@ public class MSiOS extends basicTest{
 	public void test1(PerfectoTestParams params) {
 		System.out.println("Test1 in Test"+params._platform);
 		System.out.println("Test1 in Test"+params._repKey);
-		String devID = params._device;
+		String devID = params._device._id;
 		RemoteWebDriver d = util.getAppiumDriver(params._device,params._activityBandle,params._platform,params._cloud,params._user,params._password,params._repKey);
 		try {
 			System.out.println("Start test on device"+devID);
