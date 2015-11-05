@@ -86,7 +86,6 @@ public class MSiOS extends basicTest{
 			System.out.println("driver closed");
 
 			util.downloadReport(driver, "pdf","MS_VSO"+devId);	
-			System.out.println("reports downloaded");
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -99,7 +98,7 @@ public class MSiOS extends basicTest{
 
 			}catch(Exception e)
 			{
-				//  driver closed 
+				e.printStackTrace();
 			}
 
 
