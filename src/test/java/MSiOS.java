@@ -23,13 +23,18 @@ public class MSiOS extends basicTest{
 	public void test1(PerfectoTestParams params) {
 		System.out.println("Test1 in Test"+params._platform);
 		System.out.println("Test1 in Test"+params._repKey);
+		String devID = params._device;
 		RemoteWebDriver d = util.getAppiumDriver(params._device,params._activityBandle,params._platform,params._cloud,params._user,params._password,params._repKey);
 		try {
+			System.out.println("Start test on device"+devID);
+
 			this.execTest(d);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally
 		{
+			System.out.println("end test on"+devID);
+
 			this.endTest(d);
 
 		}
@@ -76,9 +81,12 @@ public class MSiOS extends basicTest{
 
 		//close the test  
 		try{
-			driver.close();				
-			util.downloadReport(driver, "pdf","MS_VSO"+devId);	
 
+			driver.close();	
+			System.out.println("driver closed");
+
+			util.downloadReport(driver, "pdf","MS_VSO"+devId);	
+			System.out.println("reports downloaded");
 		} catch (IOException e) {
 
 			e.printStackTrace();
