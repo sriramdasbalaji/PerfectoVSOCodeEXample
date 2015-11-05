@@ -113,7 +113,7 @@ public class util {
 
 		if (appLocationToInstall!= null)
 		{
-			capabilities.setCapability("app",appLocationToInstall );
+		//	capabilities.setCapability("app",appLocationToInstall );
 
 		}
 		capabilities.setCapability("user", "uzie@perfectomobile.com");
