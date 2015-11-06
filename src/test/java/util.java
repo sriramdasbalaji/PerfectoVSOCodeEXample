@@ -46,45 +46,6 @@ public class util {
 	}
 
 
-
-
-
-	public static RemoteWebDriver getRWD(device device)   {
-
-
-		RemoteWebDriver webdriver = null;
-		DesiredCapabilities capabilities = new DesiredCapabilities("mobileOS", "", Platform.ANY);
-
-		capabilities.setCapability("user", "uzie@perfectomobile.com");
-		capabilities.setCapability("password", "@Perfecto1");
-		if (device._id != null)
-		{
-			capabilities.setCapability("deviceName",  device._id);
-		}
-		if (device._os!= null)
-		{
-			//Android or IOS
-			capabilities.setCapability("platformName",  device._os);
-		}
-		if (device._osVersion!= null)
-		{
-			capabilities.setCapability("platformVersion",  device._osVersion);
-		}
-
-		try {
-			webdriver = new RemoteWebDriver(new URL("https://demo.perfectomobile.com/nexperience/perfectomobile/wd/hub") , capabilities);
-		} catch (Exception e) {
-			String ErrToRep = e.getMessage().substring(0,e.getMessage().indexOf("Command duration")-1);
-			System.out.println(ErrToRep);
-			return (null);
-
-		}
-		return webdriver;
-
-	}
-
-
-
 	public static AppiumDriver getAppiumDriver(device device,String app,String platform,String Cloud,String user,String password,String appLocationToInstall)   {
 
 		AppiumDriver webdriver= null;
@@ -116,7 +77,7 @@ public class util {
 		//	capabilities.setCapability("app",appLocationToInstall );
 
 		}
-		capabilities.setCapability("user", "uzie@perfectomobile.com");
+		capabilities.setCapability("user", user);
 		capabilities.setCapability("password", password);
 		if (device._id != null)
 		{
@@ -131,11 +92,6 @@ public class util {
 		{
 			capabilities.setCapability("platformVersion",  device._osVersion);
 		}
-		//capabilities.setCapability("platformName",  platform);
-
-
-		//capabilities.setCapability("takesScreenShot", false);
-		//capabilities.setCapability("automationName", "PerfectoMobile");
 		try {
 			webdriver = new AndroidDriver(new URL(Cloud+"/nexperience/perfectomobile/wd/hub") , capabilities);
 		} catch (Exception e) {
@@ -165,13 +121,6 @@ public class util {
 		return screenShotName;
 	}
 
-	public static void startApp(String appName,RemoteWebDriver d )
-	{
-		Map<String,String> params = new HashMap<String,String>();
-		params.put("name", appName);
-		d.executeScript("mobile:application:open", params);
-	}
-
 
 	public static void stoptApp(String appName,RemoteWebDriver d )
 	{
@@ -180,25 +129,6 @@ public class util {
 		d.executeScript("mobile:application:close", params);
 	}
 
-	public static void setLocation(String address,RemoteWebDriver d )
-	{
-		Map<String,String> params = new HashMap<String,String>();
-		params.put("address", address);
-		d.executeScript("mobile:location:set", params);
-	}
-	public static void setLocationCoordinates(String latlong,RemoteWebDriver d )
-	{
-		Map<String,String> params = new HashMap<String,String>();
-		params.put("coordinates", latlong);
-		d.executeScript("mobile:location:set", params);
-	}
-
-	public static void pressKey(String key,RemoteWebDriver d )
-	{
-		Map<String,String> params = new HashMap<String,String>();
-		params.put("keySequence", key);
-		d.executeScript("mobile:presskey:", params);
-	}
 
 	public static void switchToContext(RemoteWebDriver driver, String context) {
 		RemoteExecuteMethod executeMethod = new RemoteExecuteMethod(driver);
@@ -215,8 +145,6 @@ public class util {
 		d.executeScript("mobile:touch:swipe", params);
 
 	}
-
-
 
 
 	public static void downloadReport(RemoteWebDriver driver, String type, String fileName) throws IOException {
